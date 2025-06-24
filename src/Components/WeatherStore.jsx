@@ -8,7 +8,6 @@ function WeatherStore() {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
 
-  // Get user's location
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -20,7 +19,6 @@ function WeatherStore() {
     }
   }, []);
 
-  // Fetch weather info
   useEffect(() => {
     if (location) {
       const { latitude, longitude } = location;
@@ -30,14 +28,12 @@ function WeatherStore() {
     }
   }, [location]);
 
-  // Fetch all products
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
       .then((res) => res.json())
       .then((json) => setProducts(json));
   }, []);
 
-  // Filter products based on weather
   useEffect(() => {
     if (weatherinfo && weatherinfo.weather) {
       const condition = weatherinfo.weather[0].main.toLowerCase();
